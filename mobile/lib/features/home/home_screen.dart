@@ -12,6 +12,7 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   int selectedIndex = 0;
+  String searchQuery = '';
 
   @override
   Widget build(BuildContext context) {
@@ -76,6 +77,14 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   Widget _buildExplorePage() {
+    final filteredSites = heritageSites.where((site) {
+      final query = searchQuery.trim().toLowerCase();
+
+      return site.name.toLowerCase().contains(query) ||
+          site.location.toLowerCase().contains(query) ||
+          site.category.toLowerCase().contains(query);
+    }).toList();
+
     return SingleChildScrollView(
       child: Padding(
         padding: const EdgeInsets.all(22),
@@ -110,10 +119,19 @@ class _HomeScreenState extends State<HomeScreen> {
             const SizedBox(height: 26),
 
             TextField(
+              onChanged: (value) {
+                setState(() {
+                  searchQuery = value;
+                });
+              },
+
               decoration: InputDecoration(
                 hintText: 'Search heritage destinations',
 
-                prefixIcon: const Icon(Icons.search),
+                prefixIcon: const Icon(
+                  Icons.search,
+                  color: AppTheme.primaryGreen,
+                ),
 
                 filled: true,
                 fillColor: Colors.white,
@@ -134,21 +152,61 @@ class _HomeScreenState extends State<HomeScreen> {
 
             const SizedBox(height: 18),
 
-            SizedBox(
-              height: 235,
+            filteredSites.isEmpty
+                ? Container(
+                    height: 180,
+                    width: double.infinity,
 
-              child: ListView.builder(
-                scrollDirection: Axis.horizontal,
+                    alignment: Alignment.center,
 
-                itemCount: heritageSites.length,
+                    child: const Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
 
-                itemBuilder: (context, index) {
-                  return DestinationCard(
-                    site: heritageSites[index],
-                  );
-                },
-              ),
-            ),
+                      children: [
+                        Icon(
+                          Icons.search_off,
+                          size: 48,
+                          color: Colors.grey,
+                        ),
+
+                        SizedBox(height: 12),
+
+                        Text(
+                          'No destinations found',
+                          style: TextStyle(
+                            fontSize: 17,
+                            fontWeight: FontWeight.bold,
+                            color: AppTheme.textDark,
+                          ),
+                        ),
+
+                        SizedBox(height: 6),
+
+                        Text(
+                          'Try searching with another keyword.',
+                          style: TextStyle(
+                            color: Colors.grey,
+                          ),
+                        ),
+                      ],
+                    ),
+                  )
+
+                : SizedBox(
+                    height: 235,
+
+                    child: ListView.builder(
+                      scrollDirection: Axis.horizontal,
+
+                      itemCount: filteredSites.length,
+
+                      itemBuilder: (context, index) {
+                        return DestinationCard(
+                          site: filteredSites[index],
+                        );
+                      },
+                    ),
+                  ),
 
             const SizedBox(height: 34),
 

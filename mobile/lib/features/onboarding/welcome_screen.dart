@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-
+import '../home/home_screen.dart';
 import '../../app/theme/app_theme.dart';
 
 class WelcomeScreen extends StatelessWidget {
@@ -92,8 +92,13 @@ class WelcomeScreen extends StatelessWidget {
 
                     child: ElevatedButton(
                       onPressed: () {
-                        // Navigation will be added next.
-                      },
+                        Navigator.pushReplacement(
+                            context,
+                            MaterialPageRoute(
+                            builder: (context) => const HomeScreen(),
+                            ),
+                        );
+                        },
 
                       child: const Text(
                         'Get Started',

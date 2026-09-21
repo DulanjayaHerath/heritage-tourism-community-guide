@@ -6,6 +6,7 @@ import '../favourites/favourites_screen.dart';
 import '../../data/mock/experience_data.dart';
 import '../../core/widgets/experience_card.dart';
 import '../bookings/bookings_screen.dart';
+import '../profile/profile_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -31,8 +32,18 @@ class _HomeScreenState extends State<HomeScreen> {
 
             const BookingsScreen(),
 
-            const Center(
-              child: Text('Profile - Coming Soon'),
+            ProfileScreen(
+              onFavouritesTap: () {
+                setState(() {
+                  selectedIndex = 1;
+                });
+              },
+
+              onBookingsTap: () {
+                setState(() {
+                  selectedIndex = 2;
+                });
+              },
             ),
           ],
         ),

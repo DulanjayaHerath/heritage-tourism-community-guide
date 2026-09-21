@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-
+import '../bookings/booking_form_screen.dart';
 import '../../app/theme/app_theme.dart';
 import '../../models/community_experience.dart';
 
@@ -144,14 +144,16 @@ class ExperienceDetailsScreen extends StatelessWidget {
 
             child: ElevatedButton(
               onPressed: () {
-                ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(
-                    content: Text(
-                      'Booking feature is coming next!',
+                Navigator.push(
+                  context,
+
+                    MaterialPageRoute(
+                      builder: (context) => BookingFormScreen(
+                        experience: experience,
+                      ),
                     ),
-                  ),
-                );
-              },
+                  );
+                },
 
               child: const Text(
                 'Book This Experience',

@@ -5,6 +5,7 @@ import '../../core/widgets/destination_card.dart';
 import '../favourites/favourites_screen.dart';
 import '../../data/mock/experience_data.dart';
 import '../../core/widgets/experience_card.dart';
+import '../bookings/bookings_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -28,9 +29,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
             const FavouritesScreen(),
 
-            const Center(
-              child: Text('Bookings - Coming Soon'),
-            ),
+            const BookingsScreen(),
 
             const Center(
               child: Text('Profile - Coming Soon'),

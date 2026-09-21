@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import '../../data/mock/heritage_data.dart';
 import '../../app/theme/app_theme.dart';
 import '../../core/widgets/destination_card.dart';
+import '../favourites/favourites_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -23,16 +24,14 @@ class _HomeScreenState extends State<HomeScreen> {
           children: [
             _buildExplorePage(),
 
+            const FavouritesScreen(),
+
             const Center(
-              child: Text('Favourites — Coming Soon'),
+              child: Text('Bookings - Coming Soon'),
             ),
 
             const Center(
-              child: Text('Bookings — Coming Soon'),
-            ),
-
-            const Center(
-              child: Text('Profile — Coming Soon'),
+              child: Text('Profile - Coming Soon'),
             ),
           ],
         ),

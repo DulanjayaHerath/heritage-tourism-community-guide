@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-
+import '../../data/repositories/favourites_repository.dart';
 import '../../app/theme/app_theme.dart';
 import '../../models/heritage_site.dart';
 
@@ -21,8 +21,37 @@ class HeritageDetailsScreen extends StatelessWidget {
             pinned: true,
 
             backgroundColor: AppTheme.primaryGreen,
-
             foregroundColor: Colors.white,
+
+            actions: [
+              ListenableBuilder(
+                listenable: favouritesRepository,
+
+                builder: (context, child) {
+                  final isFavourite =
+                      favouritesRepository.isFavourite(site.id);
+
+                  return IconButton(
+                    tooltip: isFavourite
+                        ? 'Remove from favourites'
+                        : 'Add to favourites',
+
+                    icon: Icon(
+                      isFavourite
+                          ? Icons.favorite
+                          : Icons.favorite_border,
+                      color: isFavourite
+                          ? Colors.redAccent
+                          : Colors.white,
+                    ),
+
+                    onPressed: () {
+                      favouritesRepository.toggleFavourite(site.id);
+                    },
+                  );
+                },
+              ),
+            ],
 
             flexibleSpace: FlexibleSpaceBar(
               background: Image.asset(

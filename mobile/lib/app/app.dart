@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 
 import 'theme/app_theme.dart';
 
+import '../features/onboarding/welcome_screen.dart';
+
 class HeritageTourismApp extends StatelessWidget {
   const HeritageTourismApp({super.key});
 
@@ -14,18 +16,7 @@ class HeritageTourismApp extends StatelessWidget {
 
       theme: AppTheme.lightTheme,
 
-      home: Scaffold(
-        appBar: AppBar(
-          title: const Text('Heritage Tourism'),
-        ),
-
-        body: const Center(
-          child: Text(
-            'Discover the Hidden Heritage of Sri Lanka',
-            textAlign: TextAlign.center,
-          ),
-        ),
-      ),
+      home: const WelcomeScreen(),
     );
   }
 }

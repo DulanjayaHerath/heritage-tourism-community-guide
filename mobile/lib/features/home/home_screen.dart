@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-
+import '../../data/mock/heritage_data.dart';
 import '../../app/theme/app_theme.dart';
 import '../../core/widgets/destination_card.dart';
 
@@ -135,33 +135,18 @@ class _HomeScreenState extends State<HomeScreen> {
             const SizedBox(height: 18),
 
             SizedBox(
-              height: 250,
+              height: 235,
 
-              child: ListView(
+              child: ListView.builder(
                 scrollDirection: Axis.horizontal,
 
-                children: const [
-                  DestinationCard(
-                    name: 'Sigiriya',
-                    location: 'Matale District',
-                    imagePath: 'assets/images/sigiriya.jpeg',
-                    category: 'Ancient Fortress',
-                  ),
+                itemCount: heritageSites.length,
 
-                  DestinationCard(
-                    name: 'Yapahuwa',
-                    location: 'Kurunegala District',
-                    imagePath: 'assets/images/yapahuwa.jpeg',
-                    category: 'Historical Kingdom',
-                  ),
-
-                  DestinationCard(
-                    name: 'Ritigala',
-                    location: 'Anuradhapura District',
-                    imagePath: 'assets/images/ritigala.jpeg',
-                    category: 'Forest Monastery',
-                  ),
-                ],
+                itemBuilder: (context, index) {
+                  return DestinationCard(
+                    site: heritageSites[index],
+                  );
+                },
               ),
             ),
 

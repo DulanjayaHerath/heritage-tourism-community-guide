@@ -3,6 +3,8 @@ import '../../data/mock/heritage_data.dart';
 import '../../app/theme/app_theme.dart';
 import '../../core/widgets/destination_card.dart';
 import '../favourites/favourites_screen.dart';
+import '../../data/mock/experience_data.dart';
+import '../../core/widgets/experience_card.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -216,18 +218,10 @@ class _HomeScreenState extends State<HomeScreen> {
 
             const SizedBox(height: 18),
 
-            _buildExperienceCard(
-              'Traditional Pottery',
-              'Discover Sri Lankan craftsmanship',
-              Icons.palette_outlined,
-            ),
-
-            const SizedBox(height: 12),
-
-            _buildExperienceCard(
-              'Village Cooking',
-              'Experience authentic local cuisine',
-              Icons.restaurant_outlined,
+            ...communityExperiences.map(
+              (experience) => ExperienceCard(
+                experience: experience,
+              ),
             ),
 
             const SizedBox(height: 24),
@@ -264,74 +258,6 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
         ),
       ],
-    );
-  }
-
-  Widget _buildExperienceCard(
-    String title,
-    String subtitle,
-    IconData icon,
-  ) {
-    return Container(
-      padding: const EdgeInsets.all(18),
-
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(16),
-      ),
-
-      child: Row(
-        children: [
-          Container(
-            padding: const EdgeInsets.all(14),
-
-            decoration: BoxDecoration(
-              color: AppTheme.background,
-              borderRadius: BorderRadius.circular(12),
-            ),
-
-            child: Icon(
-              icon,
-              color: AppTheme.primaryGreen,
-              size: 28,
-            ),
-          ),
-
-          const SizedBox(width: 16),
-
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-
-              children: [
-                Text(
-                  title,
-                  style: const TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-
-                const SizedBox(height: 4),
-
-                Text(
-                  subtitle,
-                  style: const TextStyle(
-                    color: Colors.grey,
-                    fontSize: 13,
-                  ),
-                ),
-              ],
-            ),
-          ),
-
-          const Icon(
-            Icons.arrow_forward_ios,
-            size: 16,
-            color: Colors.grey,
-          ),
-        ],
-      ),
     );
   }
 }
